@@ -1,0 +1,124 @@
+<section>
+    <h1>Add New Product</h1>
+
+    <form 
+        [formGroup]="productForm"
+        (ngSubmit)="onSubmit()"
+        novalidate
+    >
+
+        <label for="name">Product Name</label>
+        <input 
+            id="name"
+            type="text"
+            formControlName="name"
+            required
+            [attr.aria-invalid]="productForm.controls.name.invalid && (productForm.controls.name.touched || productForm.controls.name.dirty)"
+        >
+
+        @if(
+            productForm.controls.name.invalid &&
+            (productForm.controls.name.touched ||
+            productForm.controls.name.dirty)
+        ) {
+            <div class="error-message">
+
+            @if (productForm.controls.name.hasError('required')) {
+                <p>Product name is required.</p>
+            }
+
+            @if (productForm.controls.name.hasError('minlength')) {
+                <p>Product name must have at least 3 characters.</p>
+            }
+
+            </div>
+        }
+
+        <label for="description">description</label>
+        <input
+            id="description"
+            type="text"
+            formControlName="description"
+        >
+
+        @if (
+            productForm.controls.description.invalid &&
+            (productForm.controls.description.touched ||
+            productForm.controls.description.dirty)
+        ) {
+            <p class="error-message">Description is required.</p>
+        }
+
+        <label for="price">Price</label>
+        <input
+            id="price"
+            type="number"
+            formControlName="price"
+        >
+
+        @if (
+            productForm.controls.price.invalid &&
+            (productForm.controls.price.touched ||
+            productForm.controls.price.dirty)
+        ) {
+            <p class="error-message">
+                Price must be 0 or greater.
+            </p>
+        }
+
+        <label for="category">Category</label>
+        <select id="category" formControlName="category">
+            <option value="">Choose a category</option>
+            <option value="Electronics">Electronics</option>
+            <option value="Accessories">Accessories</option>
+            <option value="Furnitures">Furnitures</option>
+        </select>
+
+        @if (
+            productForm.controls.category.invalid &&
+            (productForm.controls.category.touched ||
+            productForm.controls.category.dirty)
+        ) {
+            <p class="error-message">
+                Please choose a category.
+            </p>
+        }        
+
+        <label for="stock">Stock</label>
+        <input
+            id="stock"
+            type="number"
+            formControlName="stock"
+        >
+
+        @if (
+            productForm.controls.stock.invalid &&
+            (productForm.controls.stock.touched ||
+            productForm.controls.stock.dirty)
+        ) {
+            <p class="error-message">
+                Stock must be a non-negative whole number.
+            </p>
+        }
+        <button type="submit">
+            Preview Product
+        </button>
+        <button type="button" (click)="this.productForm.reset(); this.submittedProduct.set(null)">
+            reset
+        </button>  
+    </form>
+    @if (submittedProduct(); as product) {
+        <section class="preview">
+            <h2>Product Preview</h2>
+
+            <p><strong>Name:</strong> {{ product.name }}</p>
+            <p><strong>Description:</strong> {{ product.description }}</p>
+            <p><strong>Price:</strong> {{ product.price }} MAD</p>
+            <p><strong>Category:</strong> {{ product.category }}</p>
+            <p><strong>Stock:</strong> {{ product.stock }}</p>
+
+            <p>This is only a preview. The product has not been saved.</p>
+        </section>
+    }
+    <pre>{{ productForm.getRawValue() | json }}</pre>
+</section>

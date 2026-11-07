@@ -1,0 +1,36 @@
+{
+  "products": [
+    {
+      "id": "1",
+      "name": "Wireless Mouse",
+      "description": "Ergonomic wireless mouse",
+      "price": 129,
+      "category": "Accessories",
+      "stock": 25
+    },
+    {
+      "id": "2",
+      "name": "Mechanical Keyboard",
+      "description": "Compact mechanical keyboard",
+      "price": 249,
+      "category": "Accessories",
+      "stock": 12
+    },
+    {
+      "id": "3",
+      "name": "USB-C Hub",
+      "description": "Multi-port USB-C adapter",
+      "price": 179,
+      "category": "Electronics",
+      "stock": 8
+    },
+        {
+      "id": "4",
+      "name": "RAM msro9a",
+      "description": "16GB DDR-5 akhir ma kayn",
+      "price": 170000,
+      "category": "Electronics",
+      "stock": 10000
+    }
+  ]
+}

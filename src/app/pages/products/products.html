@@ -1,0 +1,45 @@
+<section class="products-page">
+    <h1>Product Management</h1>
+
+    <p>Manage products in your inventory</p>
+
+    <button
+        type="button"
+        [disabled]="loading()"
+        (click)="loadProducts()"
+    >
+        Refresh Products
+    </button>
+
+    <h2>
+        Total Inventory Value: {{ inventoryValue() }} MAD
+    </h2>
+
+    <a routerLink="/products/new">
+        Add New Product
+    </a>
+
+    @if(loading()) {
+        <p>Loading ....</p>
+    } @else if (errorMessage()) {
+        <p class="error"> {{errorMessage()}} </p>
+    } @else {
+        <div class="products-grid">
+            @for(product of products(); track product.id){
+                <article class="product-card">
+                    <h3>{{ product.name }}</h3>
+
+                    <p>{{ product.description }}</p>
+
+                    <p><strong>Category:</strong> {{ product.category }}</p>
+
+                    <p><strong>Price:</strong> {{ product.price }} MAD</p>
+
+                    <p><strong>Stock:</strong> {{ product.stock }}</p>
+                </article>
+            } @empty {
+                <p>No Products found.</p>
+            }
+        </div>
+    }
+</section>
